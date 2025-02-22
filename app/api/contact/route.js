@@ -13,12 +13,14 @@ export async function POST(request) {
 
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: Number(process.env.SMTP_PORT),
-      secure: false, // Must be false for port 587
-      requireTLS: true, // Enforce TLS connection
+      port: 587, // Always use 587 for TLS
+      secure: false, // This must be false for port 587
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASSWORD,
+      },
+      tls: {
+        rejectUnauthorized: false, // Prevent SSL issues
       },
     });
 

@@ -12,15 +12,12 @@ export async function POST(request) {
     console.log("📩 Sending email...");
 
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST,
-      port: 587, // Always use 587 for TLS
-      secure: false, // This must be false for port 587
+      host: process.env.SMTP_HOST,      // should be "smtp.gmail.com"
+      port: 465,                        // using port 465 for SSL
+      secure: true,                     // secure true means SSL connection
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASSWORD,
-      },
-      tls: {
-        rejectUnauthorized: false, // Prevent SSL issues
       },
     });
 
